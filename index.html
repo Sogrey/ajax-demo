@@ -8,6 +8,20 @@
                 htmlobj = $.ajax({ url: "data/test.txt", async: false });
                 $("#myDiv").html(htmlobj.responseText);
             });
+            $("#b02").click(function () {
+                $.ajax({
+                    type: "get",
+                    url: "data/testAsyn.txt",
+                    // data: { "a": a, "b": b },
+                    dataType: "text",
+                    success: function (data) {
+                        $("#myDiv").html(data);
+                    },
+                    error: function (msg) {
+                        $("#myDiv").html(msg);
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -17,7 +31,8 @@
     <div id="myDiv">
         <h2>通过 AJAX 改变文本</h2>
     </div>
-    <button id="b01" type="button">改变内容</button>
+    <button id="b01" type="button">Ajax同步 改变内容</button>
+    <button id="b02" type="button">Ajax异步 改变内容</button>
 
 </body>
 
