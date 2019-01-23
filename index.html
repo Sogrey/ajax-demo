@@ -24,20 +24,20 @@
                 });
             });
 
-            // $("#b03").click(function () {
-            //     $.ajax({
-            //         type: "post",
-            //         url: "http://117.34.118.4:9017/api/AppApi/getBaseData",
-            //         data: { "ProjectID": "61", "userId": "495" },
-            //         dataType: "text",
-            //         success: function (data) {
-            //             $("#myDiv").html(data);
-            //         },
-            //         error: function (msg) {
-            //             $("#myDiv").html(msg);
-            //         }
-            //     });
-            // });
+            $("#b03").click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "http://117.34.118.4:9017/api/AppApi/getBaseData",
+                    data: { "ProjectID": "61", "userId": "495" },
+                    dataType: "text",
+                    success: function (data) {
+                        $("#myDiv").html(data);
+                    },
+                    error: function (msg) {
+                        $("#myDiv").html(msg);
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -49,7 +49,7 @@
     </div>
     <button id="b01" type="button">Ajax同步 改变内容</button>
     <button id="b02" type="button">Ajax异步 改变内容</button>
-    <!-- <button id="b03" type="button">Ajax异步 test</button> -->
+    <button id="b03" type="button">Ajax异步 test</button>
 
 </body>
 

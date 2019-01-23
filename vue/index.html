@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Sogrey">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- Your app title -->
+    <title>My App</title>
+</head>
+
+<body>
+    <div id="app" v-bind:contenteditable="data.contenteditable">{{data.message}}</div>
+
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+
+    <!-- <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+        // function cloneObj(obj) {
+        //     var tempObj = {};
+        //     if (obj instanceof Array) {
+        //         tempObj = [];
+        //     }
+        //     for (var prop in obj) {
+        //         if (typeof prop === 'Object') {
+        //             cloneObj(prop);
+        //         }
+        //         tempObj[prop] = obj[prop];
+        //     }
+        //     return tempObj;
+        // }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                data: {
+                }
+            },
+            beforeCreate: function () {
+                console.log("beforeCreate")
+            },
+            created: function () {
+                console.log("created")
+                // this.$http.get("data.json")
+                //     .then(function (data) {
+                //         var json = data.body;
+                //         this.data = eval(json);
+                //     }, function (response) {
+                //         console.info(response);
+                //     })
+
+                axios.get('data.json')
+                    .then(resp => {
+                        app.data = eval(resp.data);                     
+                    }).catch(err => {
+                        console.log('请求失败：' + err);
+                    });
+            },
+            beforeMount: function () {
+                console.log("beforeMount")
+                console.log(this.$el)
+            },
+            mounted: function () {
+                console.log("mounted")
+                console.log(this.$el)
+            },
+            beforeUpdate: function () {
+                console.log("beforeUpdate")
+            },
+            updated: function () {
+                console.log("updated")
+            },
+            beforeDestroy: function () {
+                console.log("beforeDestroy")
+            },
+            destroyed: function () {
+                console.log("destroyed")
+            },
+        });
+        document.title = '页面标题';
+        var app4 = new Vue({
+            el: '#app-4',
+            data: {
+                todos: [{
+                        text: '学习 JavaScript'
+                    },
+                    {
+                        text: '学习 Vue'
+                    },
+                    {
+                        text: '整个牛项目'
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>
