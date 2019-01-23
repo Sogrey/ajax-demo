@@ -67,7 +67,9 @@
         var app = new Vue({
             el: "#app",
             data: {
-                data: {}
+                data: {
+                    message: ""
+                }
             },
             beforeCreate: function () {
                 console.log("beforeCreate")
@@ -81,13 +83,15 @@
                 //     }, function (response) {
                 //         console.info(response);
                 //     })
-                var editable = getParam("editable")
-                if (editable) {
-                    app.data.message = "可编辑了"
-                }
+
                 axios.get('data.json')
                     .then(resp => {
                         app.data = eval(resp.data);
+
+                        var editable = getParam("editable")
+                        if (editable) {
+                            app.data.message = "可编辑了"
+                        }
                     }).catch(err => {
                         console.log('请求失败：' + err);
                     });
